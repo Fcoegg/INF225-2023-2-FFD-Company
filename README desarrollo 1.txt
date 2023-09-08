@@ -1,5 +1,5 @@
-miembros: Felipe Fernández rol 201856602-0
-	  francisco gonzález guerra rol 202011575-3
+miembros: Felipe Fernández 		rol 201856602-0
+	  Francisco González Guerra 	rol 202011575-3
 	  Diego Ignacio Acevedo Pizarro rol 202023528-7
 
 Desarrollo de HU1 ingreso de datos
@@ -14,3 +14,5 @@ las url del frontend estan en localhost:3000
 
 por problemas de conexion el metodo put y delete no quedaron implementados
 en el metodo get quedo parcialmente implementado debido a que por algun problema no devuelve todos los campos
+
+Docker: Pueden existir algunos inconvenientes con la instanciacion de Docker, por problemas de fuerza mayor no se alcanzo a testear si funciona Docker.
