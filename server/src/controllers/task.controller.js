@@ -87,19 +87,11 @@ const actualizarinfra = async (req,res,next) =>{
     }
 }
 
-const obtenerlogin = async (req,res,next) =>{
+const obtenerlogin =  async (req,res,next) =>{
+
     try {
-        const {nombre, contrasena} = req.params
-
-        const result = await pool.query('SELECT * FROM usuarios WHERE username, contrasena = $1,$2', [nombre, contrasena])
-
-        if (result.rows.length == 0) 
-            return res.status(404).json({
-                message: "login fallado",
-            });
-
-        return res.json(result.rows[0]);
-        
+        const infracciones = await pool.query('SELECT * FROM usuarios');
+        res.json(infracciones.rows);
     } catch (error) {
         next(error)
     }
