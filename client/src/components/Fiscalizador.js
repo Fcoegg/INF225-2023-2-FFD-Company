@@ -5,6 +5,7 @@ import {AppBar, Box, Container, Toolbar} from "@mui/material"
 import { Link } from "react-router-dom"
 
 
+
 export default function TaskList() {
   const [tasks,setTasks]=useState([])
   const navigate=useNavigate()
@@ -24,6 +25,7 @@ export default function TaskList() {
       console.log(error);
     }
   };
+
 
   useEffect(()=>{
     loadTasks()
@@ -83,9 +85,6 @@ export default function TaskList() {
                   Delete
                 </Button>
               </div>
-              
-              
-              
             </CardContent>
           </Card>
       )):null}
