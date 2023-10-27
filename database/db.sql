@@ -10,3 +10,8 @@ CREATE TABLE ingreso(
     empadronado BOOLEAN ,
     notificacion BYTEA
 );
+
+CREATE TABLE usuarios(
+    ID SERIAL PRIMARY KEY, 
+    username VARCHAR(50), 
+    contrasena VARCHAR(100));
