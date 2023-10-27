@@ -12,13 +12,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useNavigate } from "react-router-dom"
+import {useState, useEffect} from 'react'
 
 const darkTheme = createTheme({
     palette: {
       mode: 'dark',
     },
   });
-  
 
 function Copyright(props) {
   return (
@@ -32,19 +32,46 @@ function Copyright(props) {
     </Typography>
   );
 }
-
 // TODO remove, this demo shouldn't need to reset the theme.
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  const [log,setLog]=useState([])
+  const [forma, setIngreso] = useState({
+    email: '',
+    password: ''
+  })
+
+  const loadLogin=(log,forma)=>{
+    console.log("Hola")
+    console.log(log)
+    for (let i = 0; i < log.length; i++) {
+      
+      if (log[i].username === forma.email && log[i].contrasena ===forma.password) {
+          navigate('/tasks')
+          break;
+      }
+      else if (log[i].username ===forma.email){
+        console.log('usuario coincide')
+      }
+      else if (log[i].contrasena ===forma.password){
+        console.log('pass coincide')
+      }
+    }
+    
+    
+  }
+  const loadLogs = async()=>{
+    const response =await fetch('http://localhost:4000/login')
+    const data = await response.json()
+    setLog(data)
+  }
+
   const navigate = useNavigate()
+  useEffect(()=>{
+    loadLogs()
+  },[]);
+  const handleChange=(e)=>
+      setIngreso({...forma,[e.target.name]:e.target.value});
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -64,7 +91,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -72,6 +99,7 @@ export default function SignIn() {
               id="email"
               label="Usuario"
               name="email"
+              onChange={handleChange}
               autoComplete="email"
               autoFocus
             />
@@ -80,6 +108,7 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
+              onChange={handleChange}
               label="Contrasena"
               type="password"
               id="password"
@@ -93,7 +122,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => navigate("/tasks")}           
+              onClick={() => loadLogin(log,forma)}           
             >
               Log in
             </Button>
