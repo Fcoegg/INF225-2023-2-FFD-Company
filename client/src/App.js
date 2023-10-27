@@ -3,7 +3,7 @@ import Fiscalizador from './components/Fiscalizador'
 import Taskform from './components/Taskform'
 import {Container} from '@mui/material'
 import SignIn from './components/login'
-import Infractor from './components/Infractor'
+
 
 
 export default function App() {
